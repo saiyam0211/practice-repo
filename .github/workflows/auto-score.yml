@@ -16,7 +16,8 @@ jobs:
       - name: Validate
         run: |
           BRANCH="${GITHUB_REF#refs/heads/}"
-          [[ ! "$BRANCH" =~ ^[A-Z_]+_[A-Z_]+_AI_Fix$ ]] && exit 1
+          # Allow any sequence of upper-case words separated by underscores, ending in _AI_Fix (ex: TEAM_NAME_ANYTHING_AI_Fix)
+          [[ ! "$BRANCH" =~ ^([A-Z_]+)_AI_Fix$ ]] && exit 1
       - uses: actions/setup-python@v4
         with:
           python-version: '3.10'
